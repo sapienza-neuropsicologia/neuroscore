@@ -1,0 +1,100 @@
+@import "tailwindcss";
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+@media print {
+  @page {
+    margin: 10mm;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: auto;
+    height: auto;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11px;
+    line-height: 1.25;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  [class*='bg-linear-to-'] {
+    background-image: none !important;
+    background-color: #fff !important;
+  }
+
+  main {
+    padding: 8px 0 16mm !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-block: 0.25rem;
+  }
+
+  section,
+  table,
+  tr,
+  td,
+  th {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  table th,
+  table td {
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+  }
+
+  button,
+  [type='button'],
+  [type='submit'] {
+    display: none !important;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  input,
+  select,
+  textarea {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+}
+
+@layer components {
+  .field {
+    @apply w-full rounded-md border border-[#d9c4b3] bg-white px-3 py-2 text-sm text-[#2c1f1a] outline-none focus:border-[#b15767] focus:ring-2 focus:ring-[#b15767]/20;
+  }
+
+  .btn-secondary {
+    @apply rounded-md border border-[#d9c4b3] px-3 py-2 text-sm text-[#6f5a4f] hover:bg-[#fff8f2];
+  }
+
+  .btn-primary {
+    @apply rounded-md border border-[#b15767] px-3 py-2 text-sm font-semibold text-[#6e2331] hover:bg-[#fff3f5];
+  }
+}

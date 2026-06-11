@@ -1,0 +1,89 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.16/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**/src/**/*",
+      "**/convex/**/*",
+      "**/.vscode/**/*",
+      "**/index.html",
+      "**/vite.config.ts",
+      "**/*.json",
+      "!**/src/routeTree.gen.ts",
+      "!**/src/components/ui/*.tsx",
+      "!**/src/styles.css",
+      "!**/_generated/**/*",
+      "!node_modules",
+      "!.next",
+      "!dist",
+      "!build"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "javascript": {
+    "formatter": {
+      "trailingCommas": "none",
+      "semicolons": "asNeeded",
+      "quoteStyle": "single"
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": true,
+      "indentWidth": 2
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noUnknownAtRules": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off",
+        "useTemplate": {
+          "level": "warn",
+          "fix": "safe"
+        }
+      },
+      "correctness": {
+        "noUnknownFunction": {
+          "level": "error",
+          "options": {
+            "ignore": ["theme"]
+          }
+        }
+      },
+      "performance": {
+        "noImgElement": "off"
+      }
+    },
+    "domains": {
+      "next": "recommended",
+      "react": "recommended"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
+}
