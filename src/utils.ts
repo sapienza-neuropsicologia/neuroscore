@@ -1,5 +1,5 @@
 export function computePatientAge(birthDate: Date, now: Date = new Date()) {
-  if (now.getDate() < birthDate.getDate()) throw 'Errore di data'
+  if (now < birthDate) throw 'Errore di data'
   let age = now.getFullYear() - birthDate.getFullYear()
   const m = now.getMonth() - birthDate.getMonth()
   if (m < 0) age -= 1

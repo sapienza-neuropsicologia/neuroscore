@@ -81,9 +81,8 @@ const correctImmediateScore = scoreCorrection(
 
 const correctDeferredScore = scoreCorrection(
   // Equazione di correzione: 5.68 + 2.59 * (log10(100-età) - 1.60) + 0.32 * (sqrt(scolarità) - 3.41)
-  ({ age, schoolYears }) =>
-    -2.59 * (Math.log10(100 - age) - 1.6) -
-    0.32 * (Math.sqrt(schoolYears) - 3.41),
+  ({ age, literacy }) =>
+    -2.59 * (Math.log10(100 - age) - 1.6) - 0.32 * (Math.sqrt(literacy) - 3.41),
   [2.39, 3.77, 5.07, 5.88],
   { minValue: 0, maxValue: 8, round: 1 }
 )

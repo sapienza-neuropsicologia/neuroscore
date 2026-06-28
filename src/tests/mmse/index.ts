@@ -15,7 +15,7 @@ export const MMSE: TestDefinition<'mmse'> = {
   priority: 10,
   abbreviation: 'MMSE',
   title: 'Mini-Mental State Examination (MMSE)',
-  subtitle: 'Versione italiana di Magni et al. (1996)',
+  description: 'Versione italiana di Magni et al. (1996)',
   links: {
     'Magni et al. 1996': asset('/papers/mmse.magni.1996.pdf')
   },

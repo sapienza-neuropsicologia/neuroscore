@@ -15,7 +15,7 @@ export const SeiDicembre: TestDefinition<'seidicembre'> = {
   priority: 100,
   abbreviation: 'Memoria di prosa',
   title: 'Memoria di Prosa - Breve Racconto',
-  subtitle:
+  description:
     'Racconto da Spinnler & Tognoni (1987) - Taratura di Carlesimo et al. (2002)',
   links: {
     Taratura: asset('/papers/seidicembre.carlesimo.2002.pdf')

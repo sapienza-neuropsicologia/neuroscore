@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { SectionPill } from '#/components/SectionPill'
-import { TestScores } from '#/components/TestScores'
+import { TestScores } from '#/components/tests/TestScores'
 import { useCurrentTest } from '#/model'
 import { type SeiDicembreResults, setRecallText, toggleCheck } from './scoring'
 

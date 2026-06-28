@@ -23,25 +23,30 @@ export function useAssessmentList() {
     queryKey: ['assessments', 'all'],
     queryFn: async () => api.assessments.list()
   })
-  const patientQuery = usePatients(
-    assessmentQuery.data?.map((s) => s.patientId)
-  )
-  const assessments = useMemo(
-    () =>
-      assessmentQuery.data
-        ? assessmentQuery.data
-            .map((assessment, index) =>
-              populateAssessment(assessment, patientQuery[index].data, [])
-            )
-            .filter((assessment) => assessment !== undefined)
-        : undefined,
-    [assessmentQuery, patientQuery]
-  )
+  const uniquePatientIds = useMemo(() => {
+    if (!assessmentQuery.data) return []
+    return Array.from(new Set(assessmentQuery.data.map((s) => s.patientId)))
+  }, [assessmentQuery.data])
+  const patientQuery = usePatients(uniquePatientIds)
+
+  const assessments = useMemo(() => {
+    if (!assessmentQuery.data) return undefined
+
+    return assessmentQuery.data
+      .map((assessment) => {
+        // Troviamo il paziente corrispondente nella lista delle query eseguite
+        const patient = patientQuery.data.find(
+          (q) => q.id === assessment.patientId
+        )
+        return populateAssessment(assessment, patient, [])
+      })
+      .filter((assessment) => assessment !== undefined)
+  }, [assessmentQuery.data, patientQuery])
+
   return {
     assessments,
-    isLoading:
-      assessmentQuery.isLoading || patientQuery.some((q) => q.isLoading),
-    isError: assessmentQuery.isError || patientQuery.some((q) => q.isError)
+    isLoading: assessmentQuery.isLoading || patientQuery.isLoading,
+    isError: assessmentQuery.isError || patientQuery.isError
   }
 }
 

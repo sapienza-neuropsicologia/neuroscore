@@ -21,7 +21,7 @@ export interface PatientCrudRecord extends SavedCrudRecord {
   surname: string
   birthDate: Date
   sex: PatientSex
-  schoolYears: number
+  literacy: number
 }
 
 export interface Patient extends Possible<PatientCrudRecord> {
@@ -41,13 +41,22 @@ export function usePatientList() {
   })
 }
 
-export function usePatients(ids?: string[]) {
+export function usePatients(ids: string[]) {
   return useQueries({
-    queries: (ids ?? []).map((id) => ({
+    queries: ids.map((id) => ({
       queryKey: ['patients', id],
       queryFn: () =>
         api.patients.get(id).then((p) => (p ? fromStoredPatient(p) : undefined))
-    }))
+    })),
+    combine: (results) => {
+      return {
+        data: results
+          .map((result) => result.data)
+          .filter((d) => d !== undefined),
+        isLoading: results.some((result) => result.isLoading),
+        isError: results.some((result) => result.isError)
+      }
+    }
   })
 }
 
@@ -57,10 +66,8 @@ export function usePatient(
 ) {
   const patientQuery = useQuery({
     queryKey: ['patients', id],
-    queryFn: async () => {
-      const record = await api.patients.get(id!)
-      return record ? fromStoredPatient(record) : undefined
-    },
+    queryFn: () =>
+      api.patients.get(id!).then((p) => (p ? fromStoredPatient(p) : undefined)),
     enabled: !!id
   })
   const assessmentQuery = usePatientAssessments(

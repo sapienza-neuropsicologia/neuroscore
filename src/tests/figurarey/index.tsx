@@ -15,9 +15,10 @@ export const FiguraRey: TestDefinition<'figurarey'> = {
   priority: 101,
   abbreviation: 'Figura di Rey',
   title: 'Figura complessa di Rey',
-  subtitle: 'Taratura di Carlesimo et al. (2002)',
+  description: 'Taratura di Carlesimo et al. (2002)',
   links: {
-    Taratura: asset('/papers/seidicembre.carlesimo.2002.pdf')
+    Taratura: asset('/papers/seidicembre.carlesimo.2002.pdf'),
+    'Figura da stampare': asset('/tests/figurarey/print.pdf')
   },
   initialValue: FIGURAREY_INITIAL_VALUE,
   formatResults: figuraReyTable,

@@ -19,7 +19,7 @@ export type TestDefinition<T extends TestType> = {
   priority: number
   abbreviation: string
   title: string
-  subtitle: string
+  description: string
   links: Record<string, string>
   initialValue: Omit<TestResultsRegistry[T], 'assessmentId'>
   formatResults?: (result: TestResultsRegistry[T]) => ScoreTableRow[]

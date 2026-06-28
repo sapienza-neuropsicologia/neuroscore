@@ -220,7 +220,7 @@ function mapSchoolYearsToMmseClass(years: number): '0' | '5' | '8' | '13' {
 
 function computeCorrection(patient: Patient, raw: number) {
   const ageClass = mapAgeToMmseClass(patient.age)
-  const schoolClass = mapSchoolYearsToMmseClass(patient.schoolYears)
+  const schoolClass = mapSchoolYearsToMmseClass(patient.literacy)
   const k = CT[ageClass]?.[schoolClass]
   const c = Math.min(30, Math.max(0, raw + k))
   let interp = 'Deterioramento grave (< 18)'

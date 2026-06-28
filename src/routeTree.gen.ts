@@ -9,146 +9,157 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as PatientsCreateRouteImport } from './routes/patients/create'
-import { Route as PatientsPatientIdIndexRouteImport } from './routes/patients/$patientId/index'
-import { Route as AssessmentsAssessmentIdIndexRouteImport } from './routes/assessments/$assessmentId/index'
-import { Route as PatientsPatientIdEditRouteImport } from './routes/patients/$patientId/edit'
-import { Route as AssessmentsAssessmentIdTestTestTypeRouteImport } from './routes/assessments/$assessmentId/test/$testType'
+import { Route as HomeRouteImport } from './routes/_home'
+import { Route as HomeIndexRouteImport } from './routes/_home.index'
+import { Route as PatientsPatientIdRouteImport } from './routes/patients.$patientId'
+import { Route as AssessmentsAssessmentIdRouteImport } from './routes/assessments.$assessmentId'
+import { Route as HomePatientsRouteImport } from './routes/_home.patients'
+import { Route as HomeAssessmentsRouteImport } from './routes/_home.assessments'
+import { Route as AssessmentsAssessmentIdTestTestTypeRouteImport } from './routes/assessments.$assessmentId_.test.$testType'
 
-const IndexRoute = IndexRouteImport.update({
+const HomeRoute = HomeRouteImport.update({
+  id: '/_home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeIndexRoute = HomeIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => HomeRoute,
+} as any)
+const PatientsPatientIdRoute = PatientsPatientIdRouteImport.update({
+  id: '/patients/$patientId',
+  path: '/patients/$patientId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PatientsCreateRoute = PatientsCreateRouteImport.update({
-  id: '/patients/create',
-  path: '/patients/create',
+const AssessmentsAssessmentIdRoute = AssessmentsAssessmentIdRouteImport.update({
+  id: '/assessments/$assessmentId',
+  path: '/assessments/$assessmentId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PatientsPatientIdIndexRoute = PatientsPatientIdIndexRouteImport.update({
-  id: '/patients/$patientId/',
-  path: '/patients/$patientId/',
-  getParentRoute: () => rootRouteImport,
+const HomePatientsRoute = HomePatientsRouteImport.update({
+  id: '/patients',
+  path: '/patients',
+  getParentRoute: () => HomeRoute,
 } as any)
-const AssessmentsAssessmentIdIndexRoute =
-  AssessmentsAssessmentIdIndexRouteImport.update({
-    id: '/assessments/$assessmentId/',
-    path: '/assessments/$assessmentId/',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const PatientsPatientIdEditRoute = PatientsPatientIdEditRouteImport.update({
-  id: '/patients/$patientId/edit',
-  path: '/patients/$patientId/edit',
-  getParentRoute: () => rootRouteImport,
+const HomeAssessmentsRoute = HomeAssessmentsRouteImport.update({
+  id: '/assessments',
+  path: '/assessments',
+  getParentRoute: () => HomeRoute,
 } as any)
 const AssessmentsAssessmentIdTestTestTypeRoute =
   AssessmentsAssessmentIdTestTestTypeRouteImport.update({
-    id: '/assessments/$assessmentId/test/$testType',
+    id: '/assessments/$assessmentId_/test/$testType',
     path: '/assessments/$assessmentId/test/$testType',
     getParentRoute: () => rootRouteImport,
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/patients/create': typeof PatientsCreateRoute
-  '/patients/$patientId/edit': typeof PatientsPatientIdEditRoute
-  '/assessments/$assessmentId/': typeof AssessmentsAssessmentIdIndexRoute
-  '/patients/$patientId/': typeof PatientsPatientIdIndexRoute
+  '/': typeof HomeIndexRoute
+  '/assessments': typeof HomeAssessmentsRoute
+  '/patients': typeof HomePatientsRoute
+  '/assessments/$assessmentId': typeof AssessmentsAssessmentIdRoute
+  '/patients/$patientId': typeof PatientsPatientIdRoute
   '/assessments/$assessmentId/test/$testType': typeof AssessmentsAssessmentIdTestTestTypeRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/patients/create': typeof PatientsCreateRoute
-  '/patients/$patientId/edit': typeof PatientsPatientIdEditRoute
-  '/assessments/$assessmentId': typeof AssessmentsAssessmentIdIndexRoute
-  '/patients/$patientId': typeof PatientsPatientIdIndexRoute
+  '/assessments': typeof HomeAssessmentsRoute
+  '/patients': typeof HomePatientsRoute
+  '/assessments/$assessmentId': typeof AssessmentsAssessmentIdRoute
+  '/patients/$patientId': typeof PatientsPatientIdRoute
+  '/': typeof HomeIndexRoute
   '/assessments/$assessmentId/test/$testType': typeof AssessmentsAssessmentIdTestTestTypeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/patients/create': typeof PatientsCreateRoute
-  '/patients/$patientId/edit': typeof PatientsPatientIdEditRoute
-  '/assessments/$assessmentId/': typeof AssessmentsAssessmentIdIndexRoute
-  '/patients/$patientId/': typeof PatientsPatientIdIndexRoute
-  '/assessments/$assessmentId/test/$testType': typeof AssessmentsAssessmentIdTestTestTypeRoute
+  '/_home': typeof HomeRouteWithChildren
+  '/_home/assessments': typeof HomeAssessmentsRoute
+  '/_home/patients': typeof HomePatientsRoute
+  '/assessments/$assessmentId': typeof AssessmentsAssessmentIdRoute
+  '/patients/$patientId': typeof PatientsPatientIdRoute
+  '/_home/': typeof HomeIndexRoute
+  '/assessments/$assessmentId_/test/$testType': typeof AssessmentsAssessmentIdTestTestTypeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/patients/create'
-    | '/patients/$patientId/edit'
-    | '/assessments/$assessmentId/'
-    | '/patients/$patientId/'
-    | '/assessments/$assessmentId/test/$testType'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/patients/create'
-    | '/patients/$patientId/edit'
+    | '/assessments'
+    | '/patients'
     | '/assessments/$assessmentId'
     | '/patients/$patientId'
     | '/assessments/$assessmentId/test/$testType'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/assessments'
+    | '/patients'
+    | '/assessments/$assessmentId'
+    | '/patients/$patientId'
+    | '/'
+    | '/assessments/$assessmentId/test/$testType'
   id:
     | '__root__'
-    | '/'
-    | '/patients/create'
-    | '/patients/$patientId/edit'
-    | '/assessments/$assessmentId/'
-    | '/patients/$patientId/'
-    | '/assessments/$assessmentId/test/$testType'
+    | '/_home'
+    | '/_home/assessments'
+    | '/_home/patients'
+    | '/assessments/$assessmentId'
+    | '/patients/$patientId'
+    | '/_home/'
+    | '/assessments/$assessmentId_/test/$testType'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  PatientsCreateRoute: typeof PatientsCreateRoute
-  PatientsPatientIdEditRoute: typeof PatientsPatientIdEditRoute
-  AssessmentsAssessmentIdIndexRoute: typeof AssessmentsAssessmentIdIndexRoute
-  PatientsPatientIdIndexRoute: typeof PatientsPatientIdIndexRoute
+  HomeRoute: typeof HomeRouteWithChildren
+  AssessmentsAssessmentIdRoute: typeof AssessmentsAssessmentIdRoute
+  PatientsPatientIdRoute: typeof PatientsPatientIdRoute
   AssessmentsAssessmentIdTestTestTypeRoute: typeof AssessmentsAssessmentIdTestTestTypeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_home': {
+      id: '/_home'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_home/': {
+      id: '/_home/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof HomeIndexRouteImport
+      parentRoute: typeof HomeRoute
     }
-    '/patients/create': {
-      id: '/patients/create'
-      path: '/patients/create'
-      fullPath: '/patients/create'
-      preLoaderRoute: typeof PatientsCreateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/patients/$patientId/': {
-      id: '/patients/$patientId/'
+    '/patients/$patientId': {
+      id: '/patients/$patientId'
       path: '/patients/$patientId'
-      fullPath: '/patients/$patientId/'
-      preLoaderRoute: typeof PatientsPatientIdIndexRouteImport
+      fullPath: '/patients/$patientId'
+      preLoaderRoute: typeof PatientsPatientIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/assessments/$assessmentId/': {
-      id: '/assessments/$assessmentId/'
+    '/assessments/$assessmentId': {
+      id: '/assessments/$assessmentId'
       path: '/assessments/$assessmentId'
-      fullPath: '/assessments/$assessmentId/'
-      preLoaderRoute: typeof AssessmentsAssessmentIdIndexRouteImport
+      fullPath: '/assessments/$assessmentId'
+      preLoaderRoute: typeof AssessmentsAssessmentIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/patients/$patientId/edit': {
-      id: '/patients/$patientId/edit'
-      path: '/patients/$patientId/edit'
-      fullPath: '/patients/$patientId/edit'
-      preLoaderRoute: typeof PatientsPatientIdEditRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_home/patients': {
+      id: '/_home/patients'
+      path: '/patients'
+      fullPath: '/patients'
+      preLoaderRoute: typeof HomePatientsRouteImport
+      parentRoute: typeof HomeRoute
     }
-    '/assessments/$assessmentId/test/$testType': {
-      id: '/assessments/$assessmentId/test/$testType'
+    '/_home/assessments': {
+      id: '/_home/assessments'
+      path: '/assessments'
+      fullPath: '/assessments'
+      preLoaderRoute: typeof HomeAssessmentsRouteImport
+      parentRoute: typeof HomeRoute
+    }
+    '/assessments/$assessmentId_/test/$testType': {
+      id: '/assessments/$assessmentId_/test/$testType'
       path: '/assessments/$assessmentId/test/$testType'
       fullPath: '/assessments/$assessmentId/test/$testType'
       preLoaderRoute: typeof AssessmentsAssessmentIdTestTestTypeRouteImport
@@ -157,12 +168,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface HomeRouteChildren {
+  HomeAssessmentsRoute: typeof HomeAssessmentsRoute
+  HomePatientsRoute: typeof HomePatientsRoute
+  HomeIndexRoute: typeof HomeIndexRoute
+}
+
+const HomeRouteChildren: HomeRouteChildren = {
+  HomeAssessmentsRoute: HomeAssessmentsRoute,
+  HomePatientsRoute: HomePatientsRoute,
+  HomeIndexRoute: HomeIndexRoute,
+}
+
+const HomeRouteWithChildren = HomeRoute._addFileChildren(HomeRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  PatientsCreateRoute: PatientsCreateRoute,
-  PatientsPatientIdEditRoute: PatientsPatientIdEditRoute,
-  AssessmentsAssessmentIdIndexRoute: AssessmentsAssessmentIdIndexRoute,
-  PatientsPatientIdIndexRoute: PatientsPatientIdIndexRoute,
+  HomeRoute: HomeRouteWithChildren,
+  AssessmentsAssessmentIdRoute: AssessmentsAssessmentIdRoute,
+  PatientsPatientIdRoute: PatientsPatientIdRoute,
   AssessmentsAssessmentIdTestTestTypeRoute:
     AssessmentsAssessmentIdTestTestTypeRoute,
 }
